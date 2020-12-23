@@ -24,31 +24,7 @@ public class QueryBuilder {
 		return new Select(context);
 	}
 
-//	public Update update() {
-//		return new Update(context);
-//	}
-//
-//	public Update update(String table) {
-//		return new Update(context, table);
-//	}
-//
-//	public Delete delete() {
-//		return new Delete(context);
-//	}
-//
-//	public Delete delete(String table) {
-//		return new Delete(context, table);
-//	}
-//
-//	public Insert insert() {
-//		return new Insert(context);
-//	}
-//
-//	public Insert insert(String table) {
-//		return new Insert(context, table);
-//	}
-
 	public String getSql() {
-		return context.toString();
+		return context.getSql();
 	}
 }

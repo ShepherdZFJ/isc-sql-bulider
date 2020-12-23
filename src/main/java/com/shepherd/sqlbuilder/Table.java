@@ -12,4 +12,5 @@ import java.util.List;
 @Data
 public class Table {
     private List<String> names;
+    private List<TableRelation> tableRelations;
 }

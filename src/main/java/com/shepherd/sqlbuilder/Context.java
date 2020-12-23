@@ -16,6 +16,8 @@ import java.util.logging.Logger;
  * @date 2020/12/22 16:38
  */
 public class Context {
+    private static final String NEW_LINE = System.getProperty("line.separator");
+
     private static final String SPACE = " ";
 
     private final Connection connection;
@@ -46,8 +48,7 @@ public class Context {
         parameters = new LinkedList<>();
     }
 
-    @Override
-    public String toString() {
+    public String getSql() {
         return sql.toString();
     }
 
@@ -82,6 +83,12 @@ public class Context {
 //    }
 
     public Context append(String expression) {
+        sql.append(expression);
+        return this;
+    }
+
+    public Context appendLine(String expression) {
+        sql.append(NEW_LINE);
         sql.append(expression);
         return this;
     }

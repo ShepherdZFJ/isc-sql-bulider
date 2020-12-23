@@ -13,4 +13,11 @@ import java.util.List;
 @Data
 public class EntityRelation {
     private List<Column> columns;
+    private Table table;
+    private String filter;
+    private List<ConditionDTO> conditions;
+    private List<String> groupBys;
+    private List<String> orderBys;
+    private LimitDTO limit;
+
 }

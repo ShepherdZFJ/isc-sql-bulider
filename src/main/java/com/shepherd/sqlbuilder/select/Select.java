@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Select {
-	private Context context;
+	private final Context context;
 
 	private final List<String> columns;
 
@@ -19,7 +19,7 @@ public class Select {
 	}
 
 	public From from() {
-		this.context.appendSpace(StringUtils.join(columns, ",\n"));
+		this.context.appendSpace(StringUtils.join(columns, ", "));
 		return new From(context);
 	}
 
@@ -50,8 +50,8 @@ public class Select {
 		columns.add(expression);
 	}
 
-	@Override
-	public String toString() {
-		return context.toString();
+
+	public String getSql() {
+		return context.getSql();
 	}
 }
