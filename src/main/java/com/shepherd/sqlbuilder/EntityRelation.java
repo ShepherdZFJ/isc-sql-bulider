@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Data
 public class EntityRelation {
+    private DataSource dataSource;
     private List<Column> columns;
     private Table table;
     private String filter;

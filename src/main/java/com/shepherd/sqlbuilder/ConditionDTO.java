@@ -13,5 +13,6 @@ import java.util.List;
 public class ConditionDTO {
     private String name;
     private String type;
+    private List<ConditionDTO> conditions;
     private List<String> parameters;
 }

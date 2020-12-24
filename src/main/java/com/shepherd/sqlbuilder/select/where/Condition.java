@@ -1,11 +1,13 @@
-package com.shepherd.sqlbuilder.select;
+package com.shepherd.sqlbuilder.select.where;
 
 
 import com.shepherd.sqlbuilder.Context;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
-abstract class Condition {
+import java.util.Objects;
+
+public abstract class Condition {
 	protected final Context context;
 
 	Condition(Context context) {
@@ -13,7 +15,11 @@ abstract class Condition {
 	}
 
 	void add(Object condition) {
-		context.appendSpace(getPrefix() + " " + condition);
+		if (Objects.equals("WHERE", getPrefix())) {
+			context.appendLine(getPrefix()  + " " + condition);
+		} else {
+			context.appendSpace(getPrefix() + " " + condition);
+		}
 	}
 
 	void add(Object condition, Object parameter) {
@@ -30,7 +36,6 @@ abstract class Condition {
 
 	void add(Object condition, Object... parameters) {
 		if (ArrayUtils.isNotEmpty(parameters)) {
-			context.addParameters(parameters);
 			add(condition);
 		}
 	}

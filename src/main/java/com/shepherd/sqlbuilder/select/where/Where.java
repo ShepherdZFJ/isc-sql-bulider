@@ -1,20 +1,20 @@
-package com.shepherd.sqlbuilder.select;
+package com.shepherd.sqlbuilder.select.where;
 
 
 import com.shepherd.sqlbuilder.Context;
+import com.shepherd.sqlbuilder.select.*;
 import com.shepherd.sqlbuilder.select.limit.Limit;
 
-import java.sql.SQLException;
 import java.util.List;
 
-public class Where extends Condition  {
+public class Where extends Condition {
 
-	Where(Context context) {
+	public Where(Context context) {
 		super(context);
 		add("1 = 1");
 	}
 
-	Where(Context context, String condition) {
+	public Where(Context context, String condition) {
 		super(context);
 		add(condition);
 	}
@@ -43,9 +43,6 @@ public class Where extends Condition  {
 		return new OrderBy(context, columns);
 	}
 
-	public OrderBy orderBy(OrderByType order, String... columns) {
-		return new OrderBy(context, order, columns);
-	}
 
 	public Where and(Object condition) {
 		new AndCondition(context).add(condition);
@@ -101,15 +98,6 @@ public class Where extends Condition  {
 		return new Limit(context, start, size);
 	}
 
-//	@Override
-//	public <E> List<E> list(RowMapper<E> rowMapper) throws SQLException {
-//		return context.list(rowMapper);
-//	}
-//
-//	@Override
-//	public <E> E single(RowMapper<E> rowMapper) throws SQLException {
-//		return context.single(rowMapper);
-//	}
 
 	@Override
 	protected String getPrefix() {
@@ -117,7 +105,7 @@ public class Where extends Condition  {
 	}
 
 
-	public String getSql() {
-		return context.getSql();
+	public String sql() {
+		return context.sql();
 	}
 }

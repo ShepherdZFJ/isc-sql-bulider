@@ -4,7 +4,6 @@ package com.shepherd.sqlbuilder.select;
 import com.shepherd.sqlbuilder.Context;
 import org.apache.commons.lang.StringUtils;
 
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,26 +51,14 @@ public class Having  {
 		return new OrderBy(context, order, column);
 	}
 
-//	@Override
-//	public <E> List<E> list(RowMapper<E> rowMapper) throws SQLException {
-//		terminate();
-//		return context.list(rowMapper);
-//	}
-//
-//	@Override
-//	public <E> E single(RowMapper<E> rowMapper) throws SQLException {
-//		terminate();
-//		return context.single(rowMapper);
-//	}
-
-	public String getSql() {
+	public String sql() {
 		terminate();
-		return context.getSql();
+		return context.sql();
 	}
 
 	private void terminate() {
 		if (!terminated) {
-			context.appendLine(StringUtils.join(conditions, ", "));
+			context.appendSpace(StringUtils.join(conditions, ", "));
 			terminated = true;
 		}
 	}

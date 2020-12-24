@@ -10,5 +10,5 @@ import lombok.Data;
 @Data
 public class LimitDTO {
     private Integer start;
-    private Integer end;
+    private Integer size;
 }

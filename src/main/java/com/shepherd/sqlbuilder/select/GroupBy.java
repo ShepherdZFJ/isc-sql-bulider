@@ -15,18 +15,18 @@ public class GroupBy  {
 
 	private boolean terminated = false;
 
-	GroupBy(Context context) {
+	public GroupBy(Context context) {
 		this.context = context;
 		context.appendLine("GROUP BY");
 		columns = new LinkedList<>();
 	}
 
-	GroupBy(Context context, String... columns) {
+	public GroupBy(Context context, String... columns) {
 		this(context);
 		this.columns.addAll(Arrays.asList(columns));
 	}
 
-	GroupBy(Context context, List<String> columns) {
+	public GroupBy(Context context, List<String> columns) {
 		this(context);
 		this.columns.addAll(columns);
 	}
@@ -89,14 +89,14 @@ public class GroupBy  {
 //		return context.single(rowMapper);
 //	}
 
-	public String getSql() {
+	public String sql() {
 		terminate();
-		return context.getSql();
+		return context.sql();
 	}
 
 	private void terminate() {
 		if (!terminated) {
-			context.appendLine(StringUtils.join(columns, ", "));
+			context.appendSpace(StringUtils.join(columns, ", "));
 			terminated = true;
 		}
 	}

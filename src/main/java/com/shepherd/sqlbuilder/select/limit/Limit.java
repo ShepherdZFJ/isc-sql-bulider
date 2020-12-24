@@ -18,24 +18,15 @@ public class Limit {
         this.context = limit(context, start, size);
     }
 
-//        @Override
-//        public <E> List<E> list(RowMapper<E> rowMapper) throws SQLException {
-//            return context.list(rowMapper);
-//        }
-//
-//        @Override
-//        public <E> E single(RowMapper<E> rowMapper) throws SQLException {
-//            return context.single(rowMapper);
-//        }
 
     private Context limit(Context context, int start, int size) {
         return new LimiterFactory()
-                .create(context.getDatabase())
+                .create(context.getDatabaseTypeEnum())
                 .limit(context, start, size);
     }
 
-    public String getSql() {
-        return context.getSql();
+    public String sql() {
+        return context.sql();
     }
 
 

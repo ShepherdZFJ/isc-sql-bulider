@@ -1,9 +1,9 @@
-package com.shepherd.sqlbuilder.select;
+package com.shepherd.sqlbuilder.select.where;
 
 
 import com.shepherd.sqlbuilder.Context;
 
-class OrCondition extends Condition {
+public class OrCondition extends Condition {
 
 	OrCondition(Context context) {
 		super(context);

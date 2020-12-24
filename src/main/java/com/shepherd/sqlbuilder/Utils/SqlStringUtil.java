@@ -1,6 +1,7 @@
 package com.shepherd.sqlbuilder.Utils;
 
 import com.shepherd.sqlbuilder.Column;
+import com.shepherd.sqlbuilder.TableRelation;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -26,6 +27,12 @@ public class SqlStringUtil {
             s.append(" AS ").append(handleSqlName(column.getAliasName()));
         }
         return s.toString();
+    }
 
+    public static String handleJoin(TableRelation tableRelation) {
+        StringBuilder s = new StringBuilder();
+        s.append(tableRelation.getLinkTable()).append(" on ").append(tableRelation.getCenterColumn())
+                .append(tableRelation.getCompareType()).append(tableRelation.getLinkColumn());
+        return s.toString();
     }
 }

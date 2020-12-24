@@ -1,5 +1,6 @@
 package com.shepherd.sqlbuilder;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  * @date 2020/12/23 10:58
  */
 @Data
+@Builder
 public class TableRelation {
     private String centerTable;
     private String linkTable;

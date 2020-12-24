@@ -19,18 +19,18 @@ public class OrderBy {
 
 	private final List<String> columns = new ArrayList<>();
 
-	OrderBy(Context context) {
+	public OrderBy(Context context) {
 		this.context = context;
 		this.order = OrderByType.ASC;
-		context.appendLine("ORDER BY ");
+		context.appendLine("ORDER BY");
 	}
 
-	OrderBy(Context context, String... columns) {
+	public OrderBy(Context context, String... columns) {
 		this(context);
 		this.columns.addAll(Arrays.asList(columns));
 	}
 
-	OrderBy(Context context, List<String> columns) {
+	public OrderBy(Context context, List<String> columns) {
 		this(context);
 		this.columns.addAll(columns);
 		terminate();
@@ -72,22 +72,10 @@ public class OrderBy {
 		return new Limit(context, start, size);
 	}
 
-//	@Override
-//	public <E> List<E> list(RowMapper<E> rowMapper) throws SQLException {
-//		terminate();
-//		return context.list(rowMapper);
-//	}
-//
-//	@Override
-//	public <E> E single(RowMapper<E> rowMapper) throws SQLException {
-//		terminate();
-//		return context.single(rowMapper);
-//	}
 
-
-	public String getSql() {
+	public String sql() {
 		terminate();
-		return context.getSql();
+		return context.sql();
 	}
 
 	private void terminate() {

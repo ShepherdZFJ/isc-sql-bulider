@@ -2,14 +2,15 @@ package com.shepherd.sqlbuilder.builder;
 
 import com.shepherd.sqlbuilder.*;
 import com.shepherd.sqlbuilder.Utils.SqlStringUtil;
+import com.shepherd.sqlbuilder.enums.DatabaseTypeEnum;
+import com.shepherd.sqlbuilder.enums.JoinTypeEnum;
 import com.shepherd.sqlbuilder.select.From;
 import com.shepherd.sqlbuilder.select.Select;
-import com.shepherd.sqlbuilder.select.Where;
+import com.shepherd.sqlbuilder.select.where.*;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
 
 /**
  * @author fjZheng
@@ -19,15 +20,14 @@ import java.sql.Connection;
 public class SqlHolder {
     private static Logger log = LoggerFactory.getLogger(SqlBuilder.class);
 
-
     public static String getSql(EntityRelation entityRelation) {
         try {
-            Connection connection = new MemoryDatabase().getConnection();
-            QueryBuilder queryBuilder = new QueryBuilder(Database.HSQLDB, connection);
+            DatabaseTypeEnum databaseTypeEnum = DatabaseTypeEnum.getType(entityRelation.getDataSource().getType());
+            SqlBuilder sqlBuilder = new SqlBuilder(databaseTypeEnum);
             if (entityRelation == null) {
                 return null;
             }
-            Select select = queryBuilder.select();
+            Select select = sqlBuilder.select();
             if (entityRelation.getColumns() == null && entityRelation.getColumns().size() == 0) {
                 select = select.all();
             } else {
@@ -38,6 +38,11 @@ public class SqlHolder {
             From from = select.from();
             Table table = entityRelation.getTable();
             from.tables(table.getNames());
+            if (table.getTableRelations() != null && table.getTableRelations().size() != 0) {
+                for (TableRelation tableRelation : table.getTableRelations()) {
+                    from.join(JoinTypeEnum.getType(tableRelation.getJoinType()), SqlStringUtil.handleJoin(tableRelation));
+                }
+            }
             Where where = from.where();
             if (StringUtils.isNotBlank(entityRelation.getFilter())) {
                 where.and(entityRelation.getFilter());
@@ -49,9 +54,9 @@ public class SqlHolder {
                 where.orderBy(entityRelation.getOrderBys());
             }
             if (entityRelation.getLimit() != null) {
-                where.limit(entityRelation.getLimit().getStart(), entityRelation.getLimit().getEnd());
+                where.limit(entityRelation.getLimit().getStart(), entityRelation.getLimit().getSize());
             }
-            return queryBuilder.getSql();
+            return sqlBuilder.sql();
 
 
 

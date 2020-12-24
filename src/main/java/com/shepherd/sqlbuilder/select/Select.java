@@ -51,7 +51,7 @@ public class Select {
 	}
 
 
-	public String getSql() {
-		return context.getSql();
+	public String sql() {
+		return context.sql();
 	}
 }
