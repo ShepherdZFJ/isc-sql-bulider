@@ -12,6 +12,9 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author fjZheng
  * @version 1.0
@@ -46,6 +49,20 @@ public class SqlHolder {
             Where where = from.where();
             if (StringUtils.isNotBlank(entityRelation.getFilter())) {
                 where.and(entityRelation.getFilter());
+            }
+            if (entityRelation.getConditions() != null && entityRelation.getConditions().size() != 0) {
+                for(ConditionDTO conditionDTO : entityRelation.getConditions()) {
+                    if (conditionDTO.getConditionList() != null && conditionDTO.getConditionList().size() != 0) {
+                        List<String> conditions = new ArrayList<>();
+                        conditionDTO.getConditionList().forEach(conditionDTO1 -> {
+                            String condition = SqlStringUtil.handCondition(conditionDTO1);
+                            conditions.add(condition);
+                        });
+                        where.or(conditions);
+                    } else {
+                        where.and(SqlStringUtil.handCondition(conditionDTO));
+                    }
+                }
             }
             if (entityRelation.getGroupBys() != null && entityRelation.getGroupBys().size() != 0) {
                 where.groupBy(entityRelation.getGroupBys());

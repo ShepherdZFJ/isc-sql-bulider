@@ -5,6 +5,7 @@ import com.shepherd.sqlbuilder.Context;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Condition {
@@ -20,6 +21,14 @@ public abstract class Condition {
 		} else {
 			context.appendSpace(getPrefix() + " " + condition);
 		}
+	}
+
+	void add(List<Object> conditions) {
+		context.appendSpace("(");
+		for (Object condition : conditions) {
+				context.appendSpace(getPrefix() + " " + condition);
+			}
+		context.appendSpace(")");
 	}
 
 	void add(Object condition, Object parameter) {

@@ -52,6 +52,20 @@ public class SqlBuilderTest {
         entityRelation.setTable(table);
 
         entityRelation.setFilter("atlas.id>2000");
+
+        List<ConditionDTO> conditionDTOList = ImmutableList.of(
+                ConditionDTO.builder().name("atlas.is_delete").compareType("=").value(0).build(),
+                ConditionDTO.builder().name("project.id").compareType("=").value(288).build(),
+                ConditionDTO.builder().name("atlas_element.name").compareType("=").value("test").build()
+        );
+        ConditionDTO conditionDTO = ConditionDTO.builder().conditionList(conditionDTOList).build();
+        List<ConditionDTO> conditions = new ArrayList<>();
+        conditions.addAll(conditionDTOList);
+        conditions.add(conditionDTO);
+
+
+        entityRelation.setConditions(conditions);
+
         List<String> orderBy = new ArrayList<>();
         orderBy.add("atlas.id desc");
         orderBy.add("atlas_element.id asc");

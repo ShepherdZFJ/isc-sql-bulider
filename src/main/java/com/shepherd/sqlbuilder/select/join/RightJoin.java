@@ -2,9 +2,9 @@ package com.shepherd.sqlbuilder.select.join;
 
 
 import com.shepherd.sqlbuilder.Context;
-import com.shepherd.sqlbuilder.select.join.Join;
 
-public class RightJoin implements Joiner {
+
+public class RightJoin  implements Joiner  {
 
 //	public RightJoin(Context context, String condition) {
 //		super(context, condition);

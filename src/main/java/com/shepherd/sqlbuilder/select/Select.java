@@ -19,6 +19,7 @@ public class Select {
 	}
 
 	public From from() {
+		//添加columns字段
 		this.context.appendSpace(StringUtils.join(columns, ", "));
 		return new From(context);
 	}

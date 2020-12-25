@@ -1,5 +1,6 @@
 package com.shepherd.sqlbuilder;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.List;
  * @date 2020/12/23 11:33
  */
 @Data
+@Builder
 public class ConditionDTO {
     private String name;
-    private String type;
-    private List<ConditionDTO> conditions;
+    private String compareType;
+    private List<ConditionDTO> conditionList;
     private List<String> parameters;
+    private Object value;
 }

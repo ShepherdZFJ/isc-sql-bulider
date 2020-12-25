@@ -49,23 +49,9 @@ public class Where extends Condition {
 		return this;
 	}
 
-	public Where and(Object condition, Object parameter) {
-		new AndCondition(context).add(condition, parameter);
-		return this;
-	}
 
-	public Where and(String condition, String parameter) {
-		new AndCondition(context).add(condition, parameter);
-		return this;
-	}
-
-	public Where and(Object condition, Object... parameters) {
-		new AndCondition(context).add(condition, parameters);
-		return this;
-	}
-
-	public Where andBetween(String columnName, Object start, Object end) {
-		new AndCondition(context).between(columnName, start, end);
+	public Where or(List<Object> conditions) {
+		new OrCondition(context).add(conditions);
 		return this;
 	}
 
@@ -74,25 +60,6 @@ public class Where extends Condition {
 		return this;
 	}
 
-	public Where or(Object condition, Object parameter) {
-		new OrCondition(context).add(condition, parameter);
-		return this;
-	}
-
-	public Where or(String condition, String parameter) {
-		new OrCondition(context).add(condition, parameter);
-		return this;
-	}
-
-	public Where or(Object condition, Object... parameters) {
-		new OrCondition(context).add(condition, parameters);
-		return this;
-	}
-
-	public Where orBetween(String columnName, Object start, Object end) {
-		new OrCondition(context).between(columnName, start, end);
-		return this;
-	}
 
 	public Limit limit(int start, int size) {
 		return new Limit(context, start, size);
